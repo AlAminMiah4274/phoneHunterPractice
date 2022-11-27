@@ -13,8 +13,17 @@ const displayPhones = phones => {
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.textContent = '';
 
-    // display only 10 phones:
+    // display only 9 phones:
     phones = phones.slice(0, 9);
+
+    // no found message:
+    const noFound = document.getElementById('no-found-message');
+    if (phones.length === 0) {
+        noFound.classList.remove('d-none');
+    }
+    else {
+        noFound.classList.add('d-none');
+    }
 
     // display all phones:
     phones.forEach(phone => {
