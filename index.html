@@ -15,6 +15,7 @@
         <h1 class="text-center mt-3">Welcome to My Phone Hunter</h1>
     </header>
     <main class="container">
+        <!-- input field & search button -->
         <section>
             <div class="input-group mb-3 mt-4">
                 <input id="search-field" type="text" class="form-control" placeholder="search your phone"
@@ -25,8 +26,20 @@
         <section class="mt-5">
             <div id="phones-container" class="row row-cols-1 row-cols-md-3 g-4">
             </div>
+            <!-- no found text -->
             <div id="no-found-message" class="mt-5 d-none">
                 <p class="text-danger fs-2 text-center">No Phone Found. Search Again!</p>
+            </div>
+            <div id="show-all" class="text-center mt-5">
+                <button class="btn btn-primary">Show All</button>
+            </div>
+        </section>
+        <!-- spinner -->
+        <section id="spinner" class="d-none">
+            <div style="height: 400px;" class="d-flex justify-content-center align-items-center">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </section>
     </main>

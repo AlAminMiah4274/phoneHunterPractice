@@ -1,20 +1,27 @@
-const loadPhones = async (searchText) => {
+const loadPhones = async (searchText, dataLimit) => {
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
         const data = await res.json();
-        displayPhones(data.data);
+        displayPhones(data.data, dataLimit);
     }
     catch (e) {
         console.log(e);
     }
 }
 
-const displayPhones = phones => {
+const displayPhones = (phones, dataLimit) => {
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.textContent = '';
 
     // display only 9 phones:
-    phones = phones.slice(0, 9);
+    const showAll = document.getElementById('show-all');
+    if (dataLimit && phones.length > 9) {
+        phones = phones.slice(0, 9);
+        showAll.classList.remove('d-none');
+    }
+    else {
+        showAll.classList.add('d-none');
+    }
 
     // no found message:
     const noFound = document.getElementById('no-found-message');
@@ -42,13 +49,45 @@ const displayPhones = phones => {
         `;
         phonesContainer.appendChild(phonesDiv);
     })
+    // stop spinner:
+    toggleSpinner(false);
+}
+
+// phone search:
+const processSearch = (dataLimit) => {
+    // start spinner:
+    toggleSpinner(true);
+    const searchField = document.getElementById('search-field');
+    const searchText = searchField.value;
+    loadPhones(searchText, dataLimit);
 }
 
 // search button:
 document.getElementById('btn-search').addEventListener('click', function () {
-    const searchField = document.getElementById('search-field');
-    const searchText = searchField.value;
-    loadPhones(searchText);
+    processSearch(9);
+})
+
+// search by pressing enter:
+document.getElementById('search-field').addEventListener('keyup', function (e) {
+    if (e.key === 'Enter') {
+        processSearch(9);
+    }
+})
+
+// spinner:
+const spinner = document.getElementById('spinner');
+const toggleSpinner = (isLoading) => {
+    if (isLoading) {
+        spinner.classList.remove('d-none');
+    }
+    else {
+        spinner.classList.add('d-none');
+    }
+}
+
+// show all button:
+document.getElementById('show-all').addEventListener('click', function () {
+    processSearch();
 })
 
 // loadPhones('phone');
