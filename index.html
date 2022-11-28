@@ -30,7 +30,7 @@
             <div id="no-found-message" class="mt-5 d-none">
                 <p class="text-danger fs-2 text-center">No Phone Found. Search Again!</p>
             </div>
-            <div id="show-all" class="text-center mt-5">
+            <div id="show-all" class="text-center mt-5 d-none">
                 <button class="btn btn-primary">Show All</button>
             </div>
         </section>
@@ -39,6 +39,26 @@
             <div style="height: 400px;" class="d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-success" role="status">
                     <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </section>
+        <!-- modal -->
+        <section>
+            <!-- Modal -->
+            <div class="modal fade" id="phoneDetailModal" tabindex="-1" aria-labelledby="phoneDetailModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="phoneDetailModalLabel"></h1>
+                        </div>
+                        <div id="phone-detail" class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
