@@ -44,6 +44,7 @@ const displayPhones = (phones, dataLimit) => {
                 <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in
                 to additional content. This content is a little bit longer.</p>
+                <button onclick="loadPhoneDetail('${phone.slug}')" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Phone Detail</button>
             </div>
         </div>
         `;
@@ -90,4 +91,31 @@ const toggleSpinner = (isLoading) => {
     }
 }
 
-// loadPhones('phone');
+// phone Detail dataload
+const loadPhoneDetail = async (id) => {
+    try {
+        const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+        const data = await res.json();
+        displayPhoneDetail(data.data);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+// show phone detail
+const displayPhoneDetail = phone => {
+    // phone detail title
+    const phoneTitle = document.getElementById('phoneDetailModalLabel');
+    phoneTitle.innerText = phone.name;
+
+    // phone detail body
+    const phoneDetail = document.getElementById('phone-detail');
+    phoneDetail.innerHTML = `
+        <p>Storage: ${phone.mainFeatures ? phone.mainFeatures.storage : 'No Data Found'}</p>
+        <p>Display Size: ${phone.mainFeatures ? phone.mainFeatures.displaySize : 'No Data Found'}</p>
+        <p>Release Date: ${phone.releaseDate ? phone.releaseDate : 'No Data Found'}</p>
+    `;
+}
+
+loadPhones('phone');
