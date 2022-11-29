@@ -49,10 +49,14 @@ const displayPhones = (phones, dataLimit) => {
         `;
         phonesContainer.appendChild(phonesDiv);
     })
+    // stop spinner
+    toggleSpinner(false);
 }
 
-// display phones input
+// display phones input start
 const processSearch = (dataLimit) => {
+    // start spinner
+    toggleSpinner(true);
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     loadPhones(searchText, dataLimit);
@@ -74,5 +78,16 @@ document.getElementById('search-field').addEventListener('keyup', function (e) {
 document.getElementById('show-all').addEventListener('click', function () {
     processSearch();
 })
+
+// spinner
+const spinner = document.getElementById('spinner');
+const toggleSpinner = (isLoading) => {
+    if (isLoading) {
+        spinner.classList.remove('d-none');
+    }
+    else {
+        spinner.classList.add('d-none');
+    }
+}
 
 // loadPhones('phone');
